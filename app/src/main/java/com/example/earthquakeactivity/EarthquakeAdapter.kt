@@ -25,9 +25,9 @@ class EarthquakeAdapter (var earthquakeList: List<Feature>):
         val layout: ConstraintLayout
         val warningImageView : ImageView
         init{
-            location = view.findViewById(R.id.location)
-            magnitude = view.findViewById(R.id.magnitude)
-            time = view.findViewById(R.id.time)
+            location = view.findViewById(R.id.item_earthquake_location)
+            magnitude = view.findViewById(R.id.item_earthquake_magnitude)
+            time = view.findViewById(R.id.item_earthquake_time)
             layout = view.findViewById(R.id.layout_earthquake)
             warningImageView = view.findViewById(R.id.warningIconImageView)
         }

@@ -48,14 +48,22 @@ class EarthquakeMapActivity : AppCompatActivity() {
 
         binding.map.setTileSource(TileSourceFactory.MAPNIK)
         var earthquake = intent.getParcelableExtra<Feature>(EarthquakeAdapter.EXTRA_EARTHQUAKE)
+
         val mapController =  binding.map.controller
+
         mapController.setZoom(9.5)
+
         val startPoint = GeoPoint(earthquake!!.geometry.coordinates[1], earthquake.geometry.coordinates[0])
+
         mapController.setCenter(startPoint);
 
         val earthquakeMarker = Marker(binding.map)
-        earthquakeMarker.position = GeoPoint(earthquake.geometry.coordinates[1], earthquake.geometry.coordinates[0])
+
+
         earthquakeMarker.title = earthquake.properties.title
+
+        earthquakeMarker.position = GeoPoint(earthquake.geometry.coordinates[1], earthquake.geometry.coordinates[0])
+
 
 //        val earthquakeInfoWindow = MarkerInfoWindow(R.layout.activity_earthquake_map, binding.map)
 //        earthquakeMarker.infoWindow = earthquakeInfoWindow

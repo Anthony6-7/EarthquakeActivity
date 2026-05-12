@@ -26,6 +26,7 @@ class EarthquakeListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -48,14 +49,15 @@ class EarthquakeListActivity : AppCompatActivity() {
                     customAdapter = EarthquakeAdapter(earthquakeData.features)
                     customAdapter.earthquakeList = customAdapter.earthquakeList.filter { it.properties.mag >= 1 }
                 }
-                binding.EarthquakeRecyclerView.adapter = customAdapter
                 binding.EarthquakeRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@EarthquakeListActivity)
+                binding.EarthquakeRecyclerView.adapter = customAdapter
 
             }
 
             override fun onFailure(call: Call<FeatureCollection>, t: Throwable) {
                 Log.d("EarthquakeList", "onFailure: ${t.message}")
             }
+
         })
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,16 +69,19 @@ class EarthquakeListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection.
         return when (item.itemId) {
+
             R.id.sort_recent -> {
                 customAdapter.earthquakeList = customAdapter.earthquakeList.sortedBy { it.properties.time }
                 customAdapter.notifyDataSetChanged()
                 true
             }
+
             R.id.sort_mag -> {
                 customAdapter.earthquakeList = customAdapter.earthquakeList.sortedBy { -it.properties.mag }
                 customAdapter.notifyDataSetChanged()
                 true
             }
+
             R.id.button_help -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Help")
@@ -88,6 +93,7 @@ class EarthquakeListActivity : AppCompatActivity() {
                 dialog.show()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
